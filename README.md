@@ -23,7 +23,7 @@ The class has to support the operators: output, =, [].
 The class has to deal with exceptions: 
 inputing an illegal char or trying to exceed the board's limits throws an exception according to the case.  
     
-**File list:** (In development)
+**File list:**  
 --  
 
 ```  
@@ -42,7 +42,7 @@ IllegalCharException.cpp
 Symbol.h  
 Makefile  
 ```  
-Further look into the classes:  (In development)    
+Further look into the classes:     
 --  
 1. **main.cpp** - This class has some examples to run and check the code with it.  
 2. **Board.hpp** - This class represents a board game of tic-tac-toe. Its fields are :   
@@ -55,7 +55,7 @@ Further look into the classes:  (In development)
 7. **DerivedChar.cpp** - The implementation of DerivedChar.hpp.   
 8. **IllegalCoordinateException.cpp** - This class represents an exception thrown when illegal coordinate values are given.  
 9. **IllegalCharException.cpp** - This class represents an exception thrown when an illegal char is given as an input.  
-The llegal chars in the game: 'X', 'O', '.'  .  
+The llegal chars in the game: '.', 'X', 'O' .  
 10. **Symbol.h** -  This class represents the llegal chars in the game.  
 
 Compile Command:  
