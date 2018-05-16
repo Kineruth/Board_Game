@@ -1,56 +1,48 @@
 #include "Board.h"
 
 
-Board::Board(int size) : size(size){
-    this->board = new DerivedChar*[size];
+Board::Board(int _size) : _size(_size){
+    this->board = new DerivedChar*[_size];
     int i;
-    for(i = 0; i < size; i++)
-        this->board[i] = new DerivedChar[size];
+    for(i = 0; i < _size; i++)
+        this->board[i] = new DerivedChar[_size];
 }
 
 Board::Board(const Board& b){
-    this->size = b.size;
-    this->board = new DerivedChar*[this->size];
+    this->_size = b._size;
+    this->board = new DerivedChar*[this->_size];
     int i, j;
-    for(i = 0; i < this->size; i++){
-        this->board[i] = new DerivedChar[this->size];
-        for(j = 0; j < this->size; j++)
+    for(i = 0; i < this->_size; i++){
+        this->board[i] = new DerivedChar[this->_size];
+        for(j = 0; j < this->_size; j++){
             this->board[i][j] = b.board[i][j];
+        }
     }
 }
 
-Board& Board::operator=(const Board& b){
-    this->~Board();
-    size = b.size;
-    board = new DerivedChar*[size];
-    int i, j;
-    for(i = 0; i < size; i++){
-        board[i] = new DerivedChar[size];
-        for(j = 0; j < size; j++)
-            board[i][j] = b.board[i][j];
-    }
-    return *this;
+int Board::size() const{
+    return this->_size;
 }
 
 Board& Board::operator= (const char c){
     DerivedChar dc(c);
     int i, j;
-    for(i = 0; i < this->size; i++)
-        for(j = 0; j < this->size; j++)
+    for(i = 0; i < this->_size; i++)
+        for(j = 0; j < this->_size; j++)
             this->board[i][j] = dc;
     return *this;
 }
 
 DerivedChar& Board::operator[] (const Coordinate& c) const{
-    if(c.getX() < size && c.getX() >= 0 && c.getY() < size && c.getY() >= 0)
+    if(c.getX() < _size && c.getX() >= 0 && c.getY() < _size && c.getY() >= 0)
         return board[c.getX()][c.getY()];
     throw IllegalCoordinateException(c);
 }
 
 ostream& operator<< (ostream& os, const Board& b){
     int i, j;
-    for(i = 0; i < b.size; i++){
-        for(j = 0; j < b.size; j++)
+    for(i = 0; i < b._size; i++){
+        for(j = 0; j < b._size; j++)
             os << b.board[i][j];
         os << endl;
     }
@@ -59,7 +51,7 @@ ostream& operator<< (ostream& os, const Board& b){
 
 Board::~Board(){
     int i;
-    for(i = 0; i< this->size; i++)
+    for(i = 0; i< this->_size; i++)
     	delete[] board[i]; //This part was allocated with new[], so we use delete[]
     delete[] board;
 }

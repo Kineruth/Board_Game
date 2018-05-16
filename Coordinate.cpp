@@ -1,9 +1,6 @@
 #include "Coordinate.h"
 
-Coordinate::Coordinate(int x, int y){
-    this->x = x;
-    this->y = y;
-}
+Coordinate::Coordinate(unsigned int x, unsigned int y) : x(x),y(y){}
 
 Coordinate& Coordinate::operator= (const Coordinate& c){
   this->x = c.getX();
@@ -11,11 +8,11 @@ Coordinate& Coordinate::operator= (const Coordinate& c){
   return *this;
 }
 
-int Coordinate::getX() const{
+unsigned int Coordinate::getX() const{
     return this->x;
 }
 
-int Coordinate::getY() const{
+unsigned int Coordinate::getY() const{
     return this->y;
 }
 

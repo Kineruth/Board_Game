@@ -1,8 +1,11 @@
 CCX=g++ -std=c++11
 
 
-a.out: Board.o Coordinate.o DerivedChar.o IllegalCharException.o IllegalCoordinateException.o
+a.out: DummyPlayers.o Board.o Coordinate.o DerivedChar.o IllegalCharException.o IllegalCoordinateException.o
 		$(CCX) main.cpp *.o
+
+DummyPlayers.o: DummyPlayers.cpp DummyPlayers.h
+		$(CCX) -c DummyPlayers.cpp
 		
 Board.o: Board.cpp Board.h
 		$(CCX) -c Board.cpp

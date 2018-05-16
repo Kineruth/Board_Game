@@ -4,11 +4,12 @@
 class Board{
     private:
         DerivedChar** board;
-        int size;
+        int _size;
     
     public:
-        Board(int size);
+        Board(int _size);
         Board(const Board& b);
+        int size() const;
         Board& operator=(const Board& b);
         Board& operator= (const char c);
         DerivedChar& operator[] (const Coordinate& c) const;
