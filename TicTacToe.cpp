@@ -34,11 +34,12 @@ bool TicTacToe::gameOver(const Player& xPlayer, const Player& oPlayer){
     
     int i, j;
     int size = _board->size();
+    Symbol symb = (*_board)[{0,size-1}];
     
     //left diagonal
-    if((Symbol symb = *_board[{0,size-1}]) != Symbol.P){
+    if(symb != Symbol.P){
         for(i = 1; i < size; i++){
-            if(*_board[{i, size-1-i}] != symb)
+            if((*_board)[{i, size-1-i}] != symb)
                 break;
             if(i == size-1){
                 if(symb == xPlayer.getChar())
@@ -48,10 +49,11 @@ bool TicTacToe::gameOver(const Player& xPlayer, const Player& oPlayer){
         }
     }
     
+    symb = (*_board)[{0,0}];
     //right diagonal
-    if((Symbol symb = *_board[{0,0}]) != Symbol.P){
+    if(symb != Symbol.P){
         for(i = 1; i < size; i++){
-            if(*_board[{i, i}] != symb)
+            if((*_board)[{i, i}] != symb)
                 break;
             if(i == size-1){
                 if(symb == xPlayer.getChar())
@@ -63,9 +65,10 @@ bool TicTacToe::gameOver(const Player& xPlayer, const Player& oPlayer){
     
     //columns
     for(j = 0; j<size; j++){
-        if((Symbol symb = *_board[{0,j}]) != Symbol.P){
+        symb = (*_board)[{0,j}];
+        if(symb != Symbol.P){
             for(i = 1; i<size; i++){
-                if(*_board[{i, j}] != symb)
+                if((*_board)[{i, j}] != symb)
                     break;
                 if(i == size-1){
                     if(xPlayer.getChar == symb)
@@ -78,9 +81,10 @@ bool TicTacToe::gameOver(const Player& xPlayer, const Player& oPlayer){
     
     //rows
     for(i = 0; i<size; i++){
-        if((Symbol symb = *_board[{i,0}]) != Symbol.P){
+        symb = (*_board)[{i,0}];
+        if(symb != Symbol.P){
             for(j = 1; j<size; j++){
-                if(*_board[{i, j}] != symb)
+                if((*_board)[{i, j}] != symb)
                     break;
                 if(j == size-1){
                     if(xPlayer.getChar == symb)
