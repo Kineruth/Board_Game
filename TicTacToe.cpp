@@ -1,11 +1,19 @@
 #include "TicTacToe.h"
 
-void TicTacToe::play(const Player& xPlayer, const Player& oPlayer){
+TicTacToe::TicTacToe(int size){
+   _board(size);
+//   _winner(0);
+}
+
+void TicTacToe::play(Player& xPlayer, Player& oPlayer){
+    
     bool turn;
-    if(oPlayer==Symbol.O){
+    
+    if(oPlayer == Symbol.O){
         _winner = oPlayer;
         turn = true;
-    }else{
+    }
+    else{
         _winner = xPlayer;
         turn = false;
     }
@@ -14,7 +22,8 @@ void TicTacToe::play(const Player& xPlayer, const Player& oPlayer){
         if(turn){
             *_board[xPlayer.play()] = xPlayer.getChar();
             turn = false;
-        }else{
+        }
+        else{
             *_board[oPlayer.play()] = oPlayer.getChar();
             turn = true;
         }
@@ -22,6 +31,7 @@ void TicTacToe::play(const Player& xPlayer, const Player& oPlayer){
 }
 
 bool TicTacToe::gameOver(const Player& xPlayer, const Player& oPlayer){
+    
     int i, j;
     int size = _board->size();
     

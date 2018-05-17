@@ -1,8 +1,15 @@
-CCX=g++ -std=c++11
+CCX = g++ -std=c++11
 
 
-a.out: DummyPlayers.o Board.o Coordinate.o DerivedChar.o IllegalCharException.o IllegalCoordinateException.o
+a.out:  TicTacToe.o Champion.o DummyPlayers.o Board.o Coordinate.o DerivedChar.o 
+		IllegalCharException.o IllegalCoordinateException.o
 		$(CCX) main.cpp *.o
+
+TicTacToe.o: TicTacToe.cpp TicTacToe.h
+		$(CCX) -c TicTacToe.cpp
+
+Champion.o: Champion.cpp Champion.h
+		$(CCX) -c Champion.cpp
 
 DummyPlayers.o: DummyPlayers.cpp DummyPlayers.h
 		$(CCX) -c DummyPlayers.cpp
@@ -15,9 +22,6 @@ Coordinate.o: Coordinate.cpp Coordinate.h
 		
 DerivedChar.o: DerivedChar.cpp DerivedChar.h
 		$(CCX) -c DerivedChar.cpp
-
-# Symbol.o: Symbol.h
-# 		$(CCX) -c Symbol.h
 
 IllegalCharException.o: IllegalCharException.cpp
 		$(CCX) -c IllegalCharException.cpp

@@ -1,6 +1,7 @@
 #include "Champion.h"
 
 const Coordinate Champion::play(const Board& board) override{
+    
     int i, j, size = board.size();
     
     if(board[{0,size-1}] == Symbol.P)
@@ -23,5 +24,4 @@ const Coordinate Champion::play(const Board& board) override{
     
     //will never happen 
     return Coordinate{-1,-1}
-    
 }
