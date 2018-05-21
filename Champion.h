@@ -1,4 +1,4 @@
-#include "Board.h"
+#include "Player.h"
 
 class Champion : public Player {
     

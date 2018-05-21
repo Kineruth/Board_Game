@@ -1,5 +1,5 @@
 #include "DerivedChar.h"
-#include "IllegalCoordinateException.cpp"
+#include "IllegalCoordinateException.h"
 
 class Board{
     private:
