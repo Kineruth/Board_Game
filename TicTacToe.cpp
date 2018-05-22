@@ -1,10 +1,5 @@
 #include "TicTacToe.h"
 
-// TicTacToe::TicTacToe(int size){
-    
-//   _board(size);
-// //   _winner(0);
-// }
 
 void TicTacToe::play(Player& xPlayer, Player& oPlayer){
     
@@ -12,15 +7,27 @@ void TicTacToe::play(Player& xPlayer, Player& oPlayer){
     xPlayer.setChar(Symbol::X);
     _winner = oPlayer;
     
+    _board = Symbol::P; //reset board
     bool turn = true;
     
     while(!gameOver(xPlayer, oPlayer)){
         if(turn){
-            _board[xPlayer.play(_board)] = xPlayer.getChar();
+            try{
+                _board[xPlayer.play(_board)] = xPlayer.getChar();
+            } 
+            catch(const IllegalCoordinateException ex){
+                break;
+            }    
             turn = false;
         }
         else{
-            _board[oPlayer.play(_board)] = oPlayer.getChar();
+            try{
+                _board[oPlayer.play(_board)] = oPlayer.getChar();
+            }
+            catch(const IllegalCoordinateException ex){
+                _winner = xPlayer;
+                break;
+            }    
             turn = true;
         }
     }
