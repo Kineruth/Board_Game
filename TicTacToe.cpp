@@ -12,8 +12,15 @@ void TicTacToe::play(Player& xPlayer, Player& oPlayer){
     
     while(!gameOver(xPlayer, oPlayer)){
         if(turn){
+            /*
+            need to throw a Coordinate Exception for player 3 & 4: 
+            player 3 - because tries to rewrite the other player char
+            player 4 - tries to put in a non existing coordinate.
+            */
             try{
-                _board[xPlayer.play(_board)] = xPlayer.getChar();
+                // _board[xPlayer.play(_board)] = xPlayer.getChar(); //need to check if it's a point
+                Coordinate c = xPlayer.play(_board);
+                _board[c] == Symbol::P ? _board[c] = xPlayer.getChar() : throw IllegalCoordinateException(c);
             } 
             catch(const IllegalCoordinateException ex){
                 break;

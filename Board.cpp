@@ -34,9 +34,8 @@ Board& Board::operator= (const char c){
 }
 
 DerivedChar& Board::operator[] (const Coordinate& c) const{
-    if(c.getX() < _size && c.getX() >= 0 && c.getY() < _size && c.getY() >= 0
-        && board[c.getX()][c.getY()] == Symbol::P)
-        return board[c.getX()][c.getY()];
+    if(c.getX() < _size && c.getX() >= 0 && c.getY() < _size && c.getY() >= 0)
+        return board[c.getX()][c.getY()]; //&& board[c.getX()][c.getY()] == Symbol::P
     throw IllegalCoordinateException(c);
 }
 

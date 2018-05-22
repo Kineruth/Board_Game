@@ -44,7 +44,7 @@ int main() {
     	And the winner is XYPlayer, playing as X! */
 
 	playAndPrintResults(game, player2, player1);  
-	cout << "hello" << endl;
+	
 	/*	The final board is 
 
 		XOOO

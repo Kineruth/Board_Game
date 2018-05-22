@@ -11,6 +11,7 @@ DerivedChar::DerivedChar(const DerivedChar& dc) {
 }
 
 DerivedChar& DerivedChar::operator= (const char c){
+    
     switch (c){
         case Symbol::X:
             this->c = c;
