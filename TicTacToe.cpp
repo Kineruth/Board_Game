@@ -1,6 +1,10 @@
 #include "TicTacToe.h"
 
-
+/*
+need to throw a Coordinate Exception for player 3 & 4: 
+player 3 - throws illegal coordinate exception.
+player 4 - throws string exception.
+*/
 void TicTacToe::play(Player& xPlayer, Player& oPlayer){
     
     oPlayer.setChar(Symbol::O);
@@ -12,11 +16,6 @@ void TicTacToe::play(Player& xPlayer, Player& oPlayer){
     
     while(!gameOver(xPlayer, oPlayer)){
         if(turn){
-            /*
-            need to throw a Coordinate Exception for player 3 & 4: 
-            player 3 - because tries to rewrite the other player char
-            player 4 - tries to put in a non existing coordinate.
-            */
             try{
                 // _board[xPlayer.play(_board)] = xPlayer.getChar(); //need to check if it's a point
                 Coordinate c = xPlayer.play(_board);
@@ -24,17 +23,26 @@ void TicTacToe::play(Player& xPlayer, Player& oPlayer){
             } 
             catch(const IllegalCoordinateException ex){
                 break;
-            }    
+            } 
+            catch(const string&  ex){
+                break;
+            }
             turn = false;
         }
         else{
             try{
-                _board[oPlayer.play(_board)] = oPlayer.getChar();
+               // _board[oPlayer.play(_board)] = oPlayer.getChar();
+               Coordinate c = oPlayer.play(_board);
+              _board[c] == Symbol::P ? _board[c] = oPlayer.getChar() : throw IllegalCoordinateException(c);
             }
             catch(const IllegalCoordinateException ex){
                 _winner = xPlayer;
                 break;
-            }    
+            }   
+            catch(const string& ex){
+                _winner = xPlayer;
+                break;
+            }
             turn = true;
         }
     }
