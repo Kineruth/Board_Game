@@ -8,16 +8,11 @@
 
 void TicTacToe::play(Player& xPlayer, Player& oPlayer){
     
-    bool turn;
+    oPlayer.setChar(Symbol::O);
+    xPlayer.setChar(Symbol::X);
+    _winner = oPlayer;
     
-    if(oPlayer.myChar == Symbol::O){
-        _winner = oPlayer;
-        turn = true;
-    }
-    else{
-        _winner = xPlayer;
-        turn = false;
-    }
+    bool turn = true;
     
     while(!gameOver(xPlayer, oPlayer)){
         if(turn){
