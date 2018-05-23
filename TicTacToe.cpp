@@ -7,9 +7,9 @@ player 4 - throws string exception.
 */
 void TicTacToe::play(Player& xPlayer, Player& oPlayer){
     
-    oPlayer.setChar(Symbol::O);
     xPlayer.setChar(Symbol::X);
-    _winner = oPlayer;
+    oPlayer.setChar(Symbol::O);
+    _winner = &oPlayer;
     
     _board = Symbol::P; //reset board
     bool turn = true;
@@ -24,7 +24,7 @@ void TicTacToe::play(Player& xPlayer, Player& oPlayer){
             catch(const IllegalCoordinateException ex){
                 break;
             } 
-            catch(const string&  ex){
+            catch(const string& ex){
                 break;
             }
             turn = false;
@@ -36,11 +36,11 @@ void TicTacToe::play(Player& xPlayer, Player& oPlayer){
               _board[c] == Symbol::P ? _board[c] = oPlayer.getChar() : throw IllegalCoordinateException(c);
             }
             catch(const IllegalCoordinateException ex){
-                _winner = xPlayer;
+                _winner = &xPlayer;
                 break;
             }   
             catch(const string& ex){
-                _winner = xPlayer;
+                _winner = &xPlayer;
                 break;
             }
             turn = true;
@@ -48,7 +48,7 @@ void TicTacToe::play(Player& xPlayer, Player& oPlayer){
     }
 }
 
-bool TicTacToe::gameOver(const Player& xPlayer, const Player& oPlayer){
+bool TicTacToe::gameOver(Player& xPlayer, Player& oPlayer){
     
     unsigned int i, j;
     unsigned int size = _board.size();
@@ -61,7 +61,7 @@ bool TicTacToe::gameOver(const Player& xPlayer, const Player& oPlayer){
                 break;
             if(i == size-1){
                 if(symb == xPlayer.getChar())
-                    _winner = xPlayer;
+                    _winner = &xPlayer;
                 return true;
             }
         }
@@ -75,7 +75,7 @@ bool TicTacToe::gameOver(const Player& xPlayer, const Player& oPlayer){
                 break;
             if(i == size-1){
                 if(symb == xPlayer.getChar())
-                    _winner = xPlayer;
+                    _winner = &xPlayer;
                 return true;
             }
         }
@@ -90,7 +90,7 @@ bool TicTacToe::gameOver(const Player& xPlayer, const Player& oPlayer){
                     break;
                 if(i == size-1){
                     if(xPlayer.getChar() == symb)
-                        _winner = xPlayer;
+                        _winner = &xPlayer;
                     return true;
                 }
             }
@@ -106,7 +106,7 @@ bool TicTacToe::gameOver(const Player& xPlayer, const Player& oPlayer){
                     break;
                 if(j == size-1){
                     if(xPlayer.getChar() == symb)
-                        _winner = xPlayer;
+                        _winner = &xPlayer;
                     return true;
                 }
             }

@@ -35,17 +35,9 @@ DerivedChar& DerivedChar::operator= (const DerivedChar& dc){
     return *this;
 }
 
-// bool DerivedChar::operator ==(const char c) const{
-//     return this->c == c;
-// }
-
 ostream& operator<< (ostream& os, const DerivedChar& dc){
     return os << dc.c;
 }
-
-// DerivedChar::operator char() const{
-//     return c;
-// }
 
 DerivedChar::operator Symbol() const{
     switch (c){
@@ -63,3 +55,11 @@ DerivedChar::operator Symbol() const{
             break;
     }
 }
+
+// bool DerivedChar::operator ==(const char c) const{
+//     return this->c == c;
+// }
+
+// DerivedChar::operator char() const{
+//     return c;
+// }
