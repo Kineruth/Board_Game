@@ -1,3 +1,5 @@
+#pragma once
+
 class Coordinate{
     private:
         unsigned int x, y;  
