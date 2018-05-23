@@ -13,8 +13,9 @@ void TicTacToe::play(Player& xPlayer, Player& oPlayer){
     
     _board = Symbol::P; //reset board
     bool turn = true;
+    int i, numOfSquares = _board.size()*_board.size();
     
-    while(!gameOver(xPlayer, oPlayer)){
+    for(i = 0; i < numOfSquares && !gameOver(xPlayer, oPlayer); i++){
         if(turn){
             try{
                 // _board[xPlayer.play(_board)] = xPlayer.getChar(); //need to check if it's a point
