@@ -1,6 +1,7 @@
 #pragma once
 #include "DerivedChar.h"
 #include "IllegalCoordinateException.h"
+#include "RGB.h"
 
 #include <string.h>
 
@@ -15,6 +16,7 @@ class Board{
         Board(int size = 0);
         Board(const Board& b);
         int size() const;
+        string draw(unsigned int pixels);
         Board& operator= (const char c);
         Board& operator= (const Board& b);
         DerivedChar& operator[] (const Coordinate& c) const;
