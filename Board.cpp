@@ -30,34 +30,41 @@ string draw(unsigned int pixels){
     char* file_name;
     sprintf(file_name, "board number %d.ppm",file_id);
     
-    
     ofstream imageFile(file_name, ios::out | ios::binary);
     imageFile << "P6" << endl << pixels <<" " << pixels << endl << 255 << endl;
     RGB image[pixels*pixels];
-    for (int j = 0; j < pixels; ++j)  {  // row
-        for (int i = 0; i < pixels; ++i) { // column
-            if(i!=0 && i % (pixels/_size) != 0)
-              image[pixels*j+i].red = 255;
-              image[pixels*j+i].green = 255;
-              image[pixels*j+i].blue = 255;
-              continue;
-            }
-            if(j!=0 && j % (pixels/_size) != 0)
-              image[pixels*j+i].red = 255;
-              image[pixels*j+i].green = 255;
-              image[pixels*j+i].blue = 255;
-              continue;
-            }
-            image[pixels*j+i].red = 0;
-            image[pixels*j+i].green = 0;
-            image[pixels*j+i].blue = 0;
-        }
-    }
-    ///
-    ///image processing
-    ///
+    drawOriginalBoard(image, pixels);
+    
+    //image processing
     imageFile.write(reinterpret_cast<char*>(&image), 3*pixels*pixels);
     imageFile.close(); 
+}
+
+void drawOriginalBoard(RGB image[], int pixels){
+    /* fill whole board with white */
+    for (int i = 0; i < pixels; ++i)  {  // row
+        for (int j = 0; j < pixels; ++j) { // column
+              image[i*pixels+j].red = 255;
+              image[i*pixels+j].green = 255;
+              image[i*pixels+j].blue = 255;
+        }
+    }
+    /* draw y lines */
+    for (int i = 0; i < pixels; ++i)  {  // row
+        for (int j = 0; j < pixels; j+=300) { // column
+                image[i*pixels+j].red = 0;
+                image[i*pixels+j].green = 0;
+                image[i*pixels+j].blue = 0;
+        }
+    }
+    /* draw x lines */
+    for (int i = 0; i < pixels; i+=300)  {  // row
+        for (int j = 0; j < pixels; ++j) { // column
+                image[i*pixels+j].red = 0;
+                image[i*pixels+j].green = 0;
+                image[i*pixels+j].blue = 0;
+        }
+    }
 }
 
 Board& Board::operator= (const char c){

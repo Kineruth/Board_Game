@@ -17,6 +17,8 @@ class Board{
         Board(const Board& b);
         int size() const;
         string draw(unsigned int pixels);
+        void drawOriginalBoard(RGB image[], int pixels);
+        
         Board& operator= (const char c);
         Board& operator= (const Board& b);
         DerivedChar& operator[] (const Coordinate& c) const;
