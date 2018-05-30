@@ -1,12 +1,16 @@
 #include "Board.h"
 
+Board::Board(){
+    this->_size = 0;
+    this->board = NULL;
+}
+
 Board::Board(int size) : _size(size){
-    if(_size > 0){
         this->board = new DerivedChar*[_size];
         int i;
         for(i = 0; i < _size; i++)
             this->board[i] = new DerivedChar[_size];
-    }
+
 }
 
 Board::Board(const Board& b){
@@ -27,22 +31,24 @@ int Board::size() const{
 
 string Board::draw(unsigned int pixels){
     static unsigned int file_id = 0;
-    string file_name = "GameX_O" + to_string(file_id);
+    string file_name = "GameX_O" + to_string(file_id) + ".ppm";
     
-    ofstream imageFile(file_name + ".ppm", ios::out | ios::binary);
+    ofstream imageFile(file_name , ios::out | ios::binary);
     
     imageFile << "P6" << endl << pixels <<" " << pixels << endl << 255 << endl;
+    
     RGB image[pixels * pixels];
     drawOriginalBoard(image, pixels);
-    drawBoard(image, pixels);
-    
+    drawBoard(image, pixels); // Segmentation fault here
+    cout << "hey3" <<endl;
     //image processing
     imageFile.write(reinterpret_cast<char*>(&image), 3 * pixels * pixels);
     imageFile.close(); 
-    
+    cout << "hey4" << endl;
     /* need to free RGB image array */
     
     file_id++;
+    return file_name;
 }
 
 void Board::drawOriginalBoard(RGB image[], unsigned int pixels){
@@ -187,6 +193,7 @@ istream& operator>> (istream& is, Board& b){
     }
     
     b = tmp;
+    
     return is;
 }
 

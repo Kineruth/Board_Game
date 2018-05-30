@@ -14,7 +14,8 @@ class Board{
         int _size;
     
     public:
-        Board(int size = 0);
+        Board();
+        Board(int size);
         Board(const Board& b);
         int size() const;
         string draw(unsigned int pixels);
