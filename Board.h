@@ -17,7 +17,10 @@ class Board{
         Board(const Board& b);
         int size() const;
         string draw(unsigned int pixels);
-        void drawOriginalBoard(RGB image[], int pixels);
+        void drawOriginalBoard(RGB image[], unsigned int pixels);
+        void drawBoard(RGB image[], unsigned int pixels);
+        void drawX(RGB image[], unsigned int pixels, unsigned int index_i, unsigned int index_j);
+        void drawO(RGB image[], unsigned int pixels, unsigned int index_i, unsigned int index_j);
         
         Board& operator= (const char c);
         Board& operator= (const Board& b);
