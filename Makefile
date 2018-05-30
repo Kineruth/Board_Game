@@ -1,4 +1,4 @@
-CCX = g++ -std=c++11
+CCX = g++ -std=c++11 
 
 
 a.out:  TicTacToe.o Champion.o DummyPlayers.o Board.o Coordinate.o DerivedChar.o

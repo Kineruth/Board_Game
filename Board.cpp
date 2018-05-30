@@ -27,24 +27,28 @@ int Board::size() const{
 
 string Board::draw(unsigned int pixels){
     static unsigned int file_id = 0;
-    char* file_name;
-    sprintf(file_name, "board number %d.ppm",file_id);
+    string file_name = "GameX_O" + to_string(file_id);
     
-    ofstream imageFile(file_name, ios::out | ios::binary);
+    ofstream imageFile(file_name + ".ppm", ios::out | ios::binary);
     
     imageFile << "P6" << endl << pixels <<" " << pixels << endl << 255 << endl;
-    RGB image[pixels*pixels];
+    RGB image[pixels * pixels];
     drawOriginalBoard(image, pixels);
     drawBoard(image, pixels);
     
     //image processing
-    imageFile.write(reinterpret_cast<char*>(&image), 3*pixels*pixels);
+    imageFile.write(reinterpret_cast<char*>(&image), 3 * pixels * pixels);
     imageFile.close(); 
+    
+    /* need to free RGB image array */
+    
+    file_id++;
 }
 
 void Board::drawOriginalBoard(RGB image[], unsigned int pixels){
     /* fill whole board with white */
     unsigned int i, j;
+    
     for (i = 0; i < pixels; ++i)  {  // row
         for (j = 0; j < pixels; ++j) { // column
               image[i * pixels + j].red = 255;
@@ -71,7 +75,9 @@ void Board::drawOriginalBoard(RGB image[], unsigned int pixels){
 }
 
 void Board::drawBoard(RGB image[], unsigned int pixels){
+    
     unsigned int i, j;
+    
     for(i = 0; i < _size; i++){
         for(j = 0; j < _size; j++){
             if(board[i][j] == Symbol::X)
@@ -110,7 +116,6 @@ void Board::drawX(RGB image[], unsigned int pixels, unsigned int index_i, unsign
 void Board::drawO(RGB image[], unsigned int pixels, unsigned int index_i, unsigned int index_j){
 
     unsigned int jumps=(pixels/_size), row, column, k, j, vertex;
-    
     
     row = index_i * jumps + jumps * 0.25; 
     column = index_j * jumps + jumps * 0.25; 
@@ -166,19 +171,19 @@ ostream& operator<< (ostream& os, const Board& b){
 }
 
 istream& operator>> (istream& is, Board& b){
+    int index = 0, len, j;
     string input;
+    
     is >> input;
+    len = input.length(); // get board's size
+    Board tmp(len);
     
-    int i, j;
-    for(i = 0; i < input.length() && input[i] != '\n'; i++);
-    
-    Board tmp(i);
-    int size = tmp.size(), ptr = 0;
-    for(i = 0; i < size; i++){
-        for(j = 0; j < size; j++){
-            tmp.board[i][j] = input[ptr++];
+    while(index < len){
+        for(j = 0; j < len; j++){
+            tmp.board[index][j] = input[j];
         }
-        ptr++;
+        is >> input; //get next line
+        index++;
     }
     
     b = tmp;

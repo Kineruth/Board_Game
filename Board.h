@@ -2,6 +2,7 @@
 #include "DerivedChar.h"
 #include "IllegalCoordinateException.h"
 #include "RGB.h"
+#include <fstream>
 
 #include <string.h>
 
