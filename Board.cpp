@@ -30,8 +30,10 @@ int Board::size() const{
 }
 
 string Board::draw(unsigned int pixels){
-    static unsigned int file_id = 0;
-    string file_name = "GameX_O" + to_string(file_id) + ".ppm";
+    //static unsigned int file_id = 0;
+    time_t result = time(nullptr);
+    string c_time = asctime(gmtime(&result));
+    string file_name = "GameX_O " + c_time + ".ppm";
     
     ofstream imageFile(file_name , ios::out | ios::binary);
     
@@ -45,7 +47,7 @@ string Board::draw(unsigned int pixels){
     imageFile.close(); 
     /* need to free RGB image array */
     
-    file_id++;
+    //file_id++;
     return file_name;
 }
 
