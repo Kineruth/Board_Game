@@ -2,11 +2,13 @@
 #include "DerivedChar.h"
 #include "IllegalCoordinateException.h"
 #include "RGB.h"
-#include <fstream>
 
+#include <fstream>
 #include <string.h>
+#include <chrono>
 
 using namespace std;
+using namespace chrono;
 
 class Board{
     private:

@@ -31,8 +31,10 @@ int Board::size() const{
 
 string Board::draw(unsigned int pixels){
     //static unsigned int file_id = 0;
-    time_t result = time(nullptr);
-    string c_time = asctime(gmtime(&result));
+    milliseconds ms = duration_cast< milliseconds >(
+        system_clock::now().time_since_epoch()
+    );
+    string c_time = to_string(ms.count());
     string file_name = "GameX_O " + c_time + ".ppm";
     
     ofstream imageFile(file_name , ios::out | ios::binary);
