@@ -40,11 +40,9 @@ string Board::draw(unsigned int pixels){
     RGB image[pixels * pixels];
     drawOriginalBoard(image, pixels);
     drawBoard(image, pixels); // Segmentation fault here
-    cout << "hey3" <<endl;
     //image processing
     imageFile.write(reinterpret_cast<char*>(&image), 3 * pixels * pixels);
     imageFile.close(); 
-    cout << "hey4" << endl;
     /* need to free RGB image array */
     
     file_id++;
@@ -101,20 +99,18 @@ void Board::drawX(RGB image[], unsigned int pixels, unsigned int index_i, unsign
     row = index_i * jumps; //starting row of matrix
     column = index_j * jumps; //starting column of matrix
     
-     for(k = 0; k < 300; k++){
-        vertex = row * pixels + k + column;
+    for(k = 0; k < jumps; k++){
+        vertex = (/*row of the UPPER corners*/row * pixels) + /*column of the LEFT corners*/column + (/*DOWN*/k * pixels) + /*RIGHT*/k;
         image[vertex].red = 0;
         image[vertex].green = 0;
         image[vertex].blue = 0;
-        row++;
     }
     
-    for(k = 0; k < 300; k++){
-        vertex = row * pixels + k + column;
+    for(k = 0; k < jumps; k++){
+        vertex = (/*row of the BOTTOM corners*/(row + jumps) * pixels) + (/*column of the LEFT corners*/column) - (/*UP*/k * pixels) + /*RIGHT*/k;
         image[vertex].red = 0;
         image[vertex].green = 0;
         image[vertex].blue = 0;
-        row--;
     }
     
 }
@@ -177,19 +173,21 @@ ostream& operator<< (ostream& os, const Board& b){
 }
 
 istream& operator>> (istream& is, Board& b){
-    int index = 0, len, j;
+    int len, j, i;
     string input;
     
     is >> input;
     len = input.length(); // get board's size
     Board tmp(len);
+    for(j = 0; j < len; j++){
+        tmp.board[0][j] = input[j];
+    }
     
-    while(index < len){
-        for(j = 0; j < len; j++){
-            tmp.board[index][j] = input[j];
-        }
+    for(i = 1; i < len; i++){
         is >> input; //get next line
-        index++;
+        for(j = 0; j < len; j++){
+            tmp.board[i][j] = input[j];
+        }
     }
     
     b = tmp;

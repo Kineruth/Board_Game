@@ -7,6 +7,6 @@ using namespace std;
 int main() {
 	Board board;
 	cin >> board;
-	string filename = board.draw(600);
+	string filename = board.draw(800);
 	// cout << filename << endl;
 }
